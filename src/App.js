@@ -1,23 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Form from "./components/Form";
+import List from "./components/List";
+import Summary from "./components/Summary";
 
 function App() {
+  const [transactions, setTransactions] = useState([]);
+  const addTransaction = (newTranscation) => {
+    setTransactions([...transactions, newTranscation]);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div className="App">
+        <div className="formcontainer">
+          <Form addTransaction={addTransaction} />
+        </div>
+        <div className="listbox">
+          <List transactions={transactions} />
+          <Summary transactions={transactions} />
+        </div>
+      </div>
     </div>
   );
 }
